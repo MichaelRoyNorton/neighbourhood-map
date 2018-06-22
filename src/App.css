@@ -2,15 +2,14 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+h1, h2, h3, h4, h5 {
+  font-weight: lighter;
 }
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 70px;
+  padding: 20px 40px;
   color: white;
 }
 
@@ -22,7 +21,66 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.burger-menu {
+  float: left;
+  clear: both;
+  font-size: 1.5em;
+  margin: 16px 0;
 }
+
+ .map {
+   position: fixed;
+   top: 110px
+ }
+
+ .Side-menu {
+   min-height: 100vh;
+   height: 100%;
+   background-color: #222;
+   color: white;
+   position: absolute;
+   overflow: scroll;
+   left: 0;
+   width: 30%;
+   z-index: 1500;
+   -moz-box-shadow: 2px 0px 5px 0px #4e4c4c;
+   -webkit-box-shadow: 2px 0px 5px 0px #4e4c4c;
+   box-shadow: 2px 0px 5px 0px #4e4c4c;
+ }
+
+ .close-menu {
+   float: right;
+   font-size: 1.5em;
+   margin: 16px 0;
+   padding: 20px;
+ }
+
+ .pubs-list {
+   list-style: none;
+   text-align: left;
+ }
+ .pubs-list li {
+   padding: 10px 5px;
+   font-weight: lighter;
+ }
+ .pubs-list li:hover {
+   background-color: #e69347;
+   cursor: pointer;
+ }
+
+ .search-wrapper {
+   margin: 16px 0;
+   padding: 20px;
+ }
+
+ .search-wrapper input {
+   padding: 10px 30px;
+   font-size: 1em;
+   text-align: center;
+   width: 75%;
+ }
+
+ .gmnoprint:hover {
+   width: 125%;
+   height: 125%;
+ }
