@@ -1,60 +1,38 @@
-import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
+import React from 'react';
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
+import { compose, withProps } from 'recompose';
+import PubMarker from './PubMarker.js'
 
-class Map extends Component {
+//
+const MyMap = compose(
+  withProps({
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyA47PFgoG6SynkYt-VPid3XIcUhpuhcwWk",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div role="application" className="map-container" style={{ height: `calc(100vh - 110px)` }} />,
+    mapElement: <div style={{ height: `100%` }} />
+  }),
+  withScriptjs,
+  withGoogleMap
+)((props) =>
+  <GoogleMap
+    defaultZoom={14}
+    defaultCenter={{ lat: 51.507769, lng: -0.128327 }}
+  >
+    <div className="list-container">
+      <i className="fas fa-times" onClick={props.handleClick}></i>
+      {props.pubs.map((pub) => (
+        <PubMarker
+          key={pub.id}
+          position={{ lat: pub.location.lat, lng: pub.location.lng }}
+          name={pub.name}
+          address={pub.location.formattedAddress}
+          selectedPub={props.selectedPub}
+        />
+      ))}
+    </div>
+  </GoogleMap>
+);
 
-  static defaultProps = {
-    center: {
-      lat: 51.507769,
-      lng:  -0.128327
-    },
-    zoom: 14,
-  };
 
 
-
-  handleClick = (e, newLat, newLng) => {
-    e.target.childNodes[0].style.display = 'block';
-    e.target.removeEventListener('click', this.handleClick);
-    return;
-  }
-
-  closeModal = (e) => {
-    e.target.style.display = 'none';
-  }
-
-  render() {
-    const PubPin = ({ text }) => <div>{text}</div>;
-    return (
-      <div className='map' style={{height: 'calc(100vh - 110px)', width: '100%'}}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyA47PFgoG6SynkYt-VPid3XIcUhpuhcwWk'}}
-          center={this.props.center}
-          defaultZoom={this.props.zoom}>
-            {this.props.pubs.map((pub) => (
-              <PubPin
-                className="pub-pin"
-                key={pub.id}
-                lat={pub.location.lat}
-                lng={pub.location.lng}
-                text={
-                  <div>
-                    <i onClick={((e) => this.handleClick(e, pub.location.lat, pub.location.lng))} className="fas fa-beer">
-                      <div className="display-modal">
-                        <i className="close-modal fas fa-times" onClick={((e) => this.closeModal(e))}></i>
-                        <h4>{pub.name}</h4>
-                        <p>{pub.location.formattedAddress}</p>
-                      </div>
-                    </i>
-                  </div>
-                  }
-              />
-            ))}
-
-        </GoogleMapReact>
-      </div>
-    );
-  }
-}
-
-export default Map;
+export default MyMap;

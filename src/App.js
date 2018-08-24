@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-import SideMenu from './components/SideMenu.js';
 import * as PubsAPI from './PubsAPI.js';
 import escapeRegExp from 'escape-string-regexp';
-import MyMap from './components/MapTest.js';
+import MyMap from './components/Map.js';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHidden: true,
       pubs: [],
       query: '',
       selectedPub: ''
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   async getPubs() {
@@ -34,23 +31,23 @@ class App extends Component {
   }
 
 
-  handleClick() {
-    this.setState({
-      isHidden: !this.state.isHidden
-    });
-  }
-
   updateQuery = (query) => {
     this.setState({ query })
   }
 
-  listClick = (e) => {
-    this.setState({selectedPub: e.target.id})
-    console.log(this.state.selectedPub);
+  hideList() {
+    let list = document.getElementsByClassName('list-container')[0];
+    list.style.display = 'none';
+  }
+
+  showList() {
+    let list = document.getElementsByClassName('list-container')[0];
+    list.style.display = 'block';
   }
 
 
   render() {
+
     let showingPubs
     if(this.state.query) {
       const match = new RegExp(escapeRegExp(this.state.query), 'i')
@@ -61,19 +58,23 @@ class App extends Component {
 
     return (
       <div className="App">
-        {!this.state.isHidden &&
-          <SideMenu
-            onChange={(event) => this.updateQuery(event.target.value)}
-            pubs={showingPubs}
-            onClick={this.handleClick.bind(this)}
-            query={this.state.query}
-            listClick={this.listClick.bind(this)}
-          />}
         <header className="App-header">
-          <i onClick={this.handleClick} className="burger-menu fas fa-bars"></i>
           <h1 className="App-title">Pubs in London</h1>
+            <div className="menu">
+              <i className="fas fa-bars" onClick={this.showList}></i>
+              <input
+                aria-label="search for pubs"
+                className="search"
+                type="text"
+                placeholder="Search for pubs"
+                value={this.state.query}
+                onChange={(event) => this.updateQuery(event.target.value)}
+              />
+            </div>
         </header>
         <MyMap
+          handleClick={this.hideList}
+          className="map"
           isMarkerShown
           pubs={showingPubs}
         />

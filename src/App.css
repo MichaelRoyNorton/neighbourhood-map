@@ -15,72 +15,95 @@ h1, h2, h3, h4, h5 {
 
 .App-title {
   font-size: 1.5em;
+  float: right;
 }
 
-.App-intro {
-  font-size: large;
+.menu {
+  text-align: left;
 }
 
-.burger-menu {
-  float: left;
-  clear: both;
-  font-size: 1.5em;
-  margin: 16px 0;
+.fa-bars {
+  padding: 25px;
+
 }
 
- .map {
-   position: fixed;
-   top: 110px
- }
-
- .Side-menu {
-   min-height: 100vh;
-   height: 100%;
-   background-color: #222;
-   color: white;
-   position: absolute;
-   overflow: scroll;
-   left: 0;
-   width: 30%;
-   z-index: 1500;
-   -moz-box-shadow: 2px 0px 5px 0px #4e4c4c;
-   -webkit-box-shadow: 2px 0px 5px 0px #4e4c4c;
-   box-shadow: 2px 0px 5px 0px #4e4c4c;
- }
-
- .close-menu {
-   float: right;
-   font-size: 1.5em;
-   margin: 16px 0;
-   padding: 20px;
- }
-
- .pubs-list {
-   list-style: none;
-   text-align: left;
- }
- .pubs-list li {
-   padding: 10px 5px;
-   font-weight: lighter;
- }
- .pubs-list li:hover {
-   background-color: #e69347;
-   cursor: pointer;
- }
-
- .search-wrapper {
-   margin: 16px 0;
-   padding: 20px;
- }
-
- .search-wrapper input {
+ .search {
    padding: 10px 30px;
    font-size: 1em;
    text-align: center;
-   width: 75%;
+   width: 205px;
+   margin: 16px 0;
  }
 
- .gmnoprint:hover {
-   width: 125%;
-   height: 125%;
- }
+.list-container {
+  min-height: calc(100vh - 110px);
+  max-height: calc(100vh - 110px);
+  background-color: #222;
+  color: white;
+  position: absolute;
+  overflow: scroll;
+  left: 0;
+  top: 110px;
+  width: 400px;
+  z-index: 1500;
+  -moz-box-shadow: 2px 0px 5px 0px #4e4c4c;
+  -webkit-box-shadow: 2px 0px 5px 0px #4e4c4c;
+  box-shadow: 2px 0px 5px 0px #4e4c4c;
+}
+
+.fa-times {
+  float: right;
+  padding: 10px 15px;
+}
+
+
+.pub-name {
+  padding: 10px 20px;
+  padding-left: 50px;
+  color: white;
+  list-style: none;
+  text-align: left;
+  font-weight: lighter;
+}
+
+.pub-name:hover {
+  background-color: #e69347;
+  cursor: pointer;
+}
+
+.info-window {
+  max-width: 50vw;
+}
+
+/* Media query */
+
+@media screen and (max-width: 615px) {
+  .App-title {
+    float: none;
+  }
+  .menu {
+    text-align: center;
+  }
+  .App-header {
+    height: 140px;
+    width: 100%;
+  }
+  .list-container {
+    top: 180px;
+    display: none;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .App-header {
+    height: 200px;
+    width: 100%;
+    padding: 15px 0 0 0;
+    margin-top: 0;
+  }
+  .list-container {
+    top: 215px;
+    width: 100%;
+
+  }
+}
